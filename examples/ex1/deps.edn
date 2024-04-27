@@ -1,0 +1,6 @@
+{:aliases
+ {:kaocha ;; added by neil
+  {:extra-deps {lambdaisland/kaocha {:mvn/version "1.88.1376"}}
+   :main-opts ["-m" "kaocha.runner"]}}
+ :deps {com.nextjournal/beholder {:mvn/version "1.0.2"}
+        io.github.tonsky/clj-reload {:mvn/version "0.5.0"}}}
