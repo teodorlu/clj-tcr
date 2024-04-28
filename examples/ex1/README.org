@@ -57,3 +57,12 @@ My conclusions:
    1. The semantics are vague about the TCR script and the TCR watcher itself
    2. Those rely on process start/start assumptions
    3. Thus, there is a two-world assumption --- the system under test and the system that tests
+** =(autotcr)= problems take two --- is the theory sound?
+"should the thing that reloads things itself reload itself" to me demonstrates that there's a paradox in this worldview.
+
+REPL-driven development does not have this problem, because the user is in charge of loading code and controlling state.
+** A two-world split
+Two system components care about the system and the system that reloads the system.
+
+1. =clj-reload= is the thing that reloads
+2. =nextjournal/beholder= is the thing that notifies the reloader that a reload should happen.
