@@ -2,7 +2,10 @@
 
 # Goal: enable TCR-powered workflows for Clojure without loosing REPL-driven goodies
 
-xx
+Traditional TCR sucks with Clojure because JVM restarts produces a slow feedback loop.
+
+We can enable a fast feedback loop by not restarting the JVM between _test_ cycles.
+Read on to understand how.
 
 ## A possible TCR script for your `user` namespace
 
