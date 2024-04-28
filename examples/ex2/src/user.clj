@@ -7,8 +7,6 @@
 
 (defn reload [] (clj-reload.core/reload))
 
-#_(reload)
-
 (defn test []
   (let [{:keys [fail error]}
         (cognitect.test-runner/test {})]
@@ -40,4 +38,4 @@
   (reload)
   (test)
 
-  )
+  :rcf)
