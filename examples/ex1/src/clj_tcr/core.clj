@@ -1,8 +1,6 @@
 (ns clj-tcr.core
   (:refer-clojure :exclude [test])
   (:require
-   [babashka.fs :as fs]
-   [clojure.string :as str]
    [clojure.test :as test]
    [cognitect.test-runner]
    [kaocha.runner]))
