@@ -39,7 +39,7 @@
 (comment
   (rtcr {})
 
-  )
+  :rcf)
 
 (defonce watcher (atom nil))
 
@@ -54,9 +54,4 @@
 (comment
   (rtcr-watch)
 
-  ;; this is working?
-
-  )
-
-
-;; clj tcr!
+  :rcf)
