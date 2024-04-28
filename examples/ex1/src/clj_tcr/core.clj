@@ -2,6 +2,7 @@
   (:refer-clojure :exclude [test])
   (:require
    babashka.process
+   [clj-reload.core :as clj-reload]
    [cognitect.test-runner]
    [kaocha.runner]))
 
@@ -23,6 +24,7 @@
   (babashka.process/shell "git reset --hard HEAD"))
 
 (defn tcr []
+  (clj-reload/reload)
   (let [ok (test)]
     (if ok
       (commit)
