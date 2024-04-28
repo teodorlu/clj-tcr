@@ -1,7 +1,9 @@
 {:paths ["src"]
  :deps
  {com.nextjournal/beholder {:mvn/version "1.0.2"}
-  io.github.tonsky/clj-reload {:mvn/version "0.5.0"}}
+  io.github.tonsky/clj-reload {:mvn/version "0.5.0"}
+  babashka/fs {:mvn/version "0.5.20"}
+  babashka/process {:mvn/version "0.5.22"}}
  :aliases
  {:kaocha
   {:extra-paths ["test"]
