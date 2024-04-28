@@ -8,8 +8,7 @@
 (defn reload [] (clj-reload.core/reload))
 
 (defn test []
-  (let [{:keys [fail error]}
-        (cognitect.test-runner/test {})]
+  (let [{:keys [fail error]} (cognitect.test-runner/test {})]
     (assert (zero? (+ fail error)))))
 
 (defn commit []
