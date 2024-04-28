@@ -74,11 +74,37 @@ Bind the function to `SPC ø t` in Doom Emacs:
 
 ## Configuring Calva for TCR with Clojure
 
-Same as for Emacs --- but instead of an Emacs Lisp function that saves, reloads and tests, we'll create a key binding that chains multiple commands:
+With Calva, we can use a `runCommands` command to run multiple commands, then `calva.runCustomREPLCommand` to interact with our REPL.
+
+Peter Strömberg describes `runCommands` nicely here:
 
 https://blog.agical.se/en/posts/vs-code-runcommands-for-multi-commands-keyboard-shortcuts/
 
-TODO:
+I chose to bind the editor TCR action to `Cmd+ø`.
+You may of course choose whatever key binding you prefer.
 
-1. Find out how to save all open tabs
-2. Find out how to use REPL commands within other commands.
+If you don't want `Cmd+ø` as the key binding (perhaps because there's no letter `ø` on your keyboard), please choose a key binding that works for you.
+
+``` json
+    {
+        "key": "cmd+[Semicolon]",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.files.saveFiles",
+                {
+                    "command": "calva.runCustomREPLCommand",
+                    "args": {
+                        "snippet": "(clj-reload.core/reload)"
+                    }
+                },
+                {
+                    "command": "calva.runCustomREPLCommand",
+                    "args": {
+                        "snippet": "(user/tcr)"
+                    }
+                },
+            ]
+        }
+    }
+```
