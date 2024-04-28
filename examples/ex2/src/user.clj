@@ -23,15 +23,15 @@
   "TCR RELOADED: AN IN-PROCESS INTERACTIVE LOOP"
   []
   (try
-    (println "trying")
-    (reload)
     (test)
     (commit)
     (println "success")
     (catch Exception _
       (println "failure")
       (revert)
-      (reload))))
+      (reload) ; In those cases where we revert, we choose to clean up our mess
+               ; -- don't leave the user with a REPL out of sync with their files.
+      )))
 
 (comment
   (reload)

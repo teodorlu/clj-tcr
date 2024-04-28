@@ -4,26 +4,15 @@
 
 xx
 
-## Configuring Emacs for TCR with Clojure
+## A possible TCR script for your `user` namespace
 
-We recommend the following approach for implementing TCR with Clojure:
+In "vanilla" TCR, _reload_ is implied as part of the `test` operation.
+This assumption doesn't hold for how people develop Clojure in practice.
+We can tweak the TCR process by inserting approperiate _reload_ operations where needed.
 
-1. Create a `tcr` function in `user.clj`
+We'll be using `tonsky/clj-reload` for this. Thank you, Niki!
 
-2. Create a `tcr` function in your Emacs config that:
-
-    1. Ensure `auto-revert-mode` is active (otherwise we don't see new file states on disk)
-
-    2. Saves all project buffers
-
-    3. Evaluates `clj-reload.core/reload` with CIDER
-
-    4. Evaluates `user/tcr` with CIDER
-
-Example Clojure `tcr` function that relies on Cognitect's test runner.
-
-You'll want to write this function yourself, so that you can run the tests you care about.
-Here is an example:
+Here's how your `user.clj` could look:
 
 ``` clojure
 (ns user
@@ -41,7 +30,7 @@ Here is an example:
 
 (defn commit []
   (babashka.process/shell "git add .")
-  (babashka.process/shell "git commit --allow-empty -m working"))
+  (babashka.process/shell "git commit -m working"))
 
 (defn revert []
   (babashka.process/shell "git reset --hard HEAD"))
@@ -51,15 +40,38 @@ Here is an example:
   "TCR RELOADED: AN IN-PROCESS INTERACTIVE LOOP"
   []
   (try
-    (reload)
     (test)
     (commit)
+    (println "success")
     (catch Exception _
+      (println "failure")
       (revert)
-      (reload))))
+      (reload) ; In those cases where we revert, we choose to clean up our mess
+               ; -- don't leave the user with a REPL out of sync with their files.
+      )))
 ```
 
-Example Emacs Lisp TCR function:
+Differences from vanilla TCR:
+
+1. We reload before we test
+2. We reload after we revert if we revert.
+
+If you want to do your own thing:
+
+1. Tweak your _test_, _commit_, _revert_ and _reload_ steps to work for you
+2. Expose them in a function. Call that function _tcr_ or something else
+3. In your editor, set up a key binding to save all files, do a reload, then call the _tcr_ function.
+
+## Configuring Emacs for TCR with Clojure
+
+We will create an Emacs Lisp function that:
+
+1. Ensures `auto-revert-mode` is active (otherwise we don't see new file states on disk)
+2. Saves all project buffers
+3. Evaluates `clj-reload.core/reload` with CIDER
+4. Evaluates `user/tcr` with CIDER
+
+Here's one way to do that:
 
 ``` emacs-lisp
 (defun teod-clj-tcr ()
@@ -70,7 +82,11 @@ Example Emacs Lisp TCR function:
   (cider-interactive-eval "(user/tcr)"))
 ```
 
-Bind the function to `SPC ø t` in Doom Emacs:
+To bind that function to `SPC ø t` in Doom Emacs:
+
+``` emacs-lisp
+(map! :g "M-RET" #'teod-clj-tcr)
+```
 
 ## Configuring Calva for TCR with Clojure
 
