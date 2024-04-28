@@ -66,3 +66,14 @@ Two system components care about the system and the system that reloads the syst
 
 1. =clj-reload= is the thing that reloads
 2. =nextjournal/beholder= is the thing that notifies the reloader that a reload should happen.
+** Avoiding the two-world split?
+The only reason we need the two world split is because the watcher runs alongside the code that does the thing.
+
+If we ditch the watcher, we avoid all these problems.
+
+We could ditch the watcher by introducing a key binding for tcr instead of reacting to saves.
+
+Emacs is also causing problems with this, because Emacs does not reload file state when the file changes under the buffer.
+** Potential way forward: ditch Emacs, ditch file watcher, make a VSCode TCR hotkey
+1. I think this is doable
+2. I don't know whether Calva can be configured to do two things on one key binding.
