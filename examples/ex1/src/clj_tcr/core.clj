@@ -49,7 +49,7 @@
 
 (defn rtcr-watch []
   (rtcr-stop)
-  (reset! watcher (beholder/watch rtcr ".")))
+  (reset! watcher (beholder/watch rtcr "src" "test")))
 
 (comment
   (rtcr-watch)
