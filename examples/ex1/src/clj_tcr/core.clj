@@ -4,7 +4,8 @@
    babashka.process
    [clj-reload.core :as clj-reload]
    [cognitect.test-runner]
-   [kaocha.runner]))
+   [kaocha.runner]
+   [nextjournal.beholder :as beholder]))
 
 (defn run-tests []
   (cognitect.test-runner/test {}))
@@ -40,6 +41,20 @@
 
   )
 
-(defn autotcr [])
+(defonce watcher (atom nil))
+
+(defn rtcr-stop []
+  (when-let [w @watcher]
+    (beholder/stop w)))
+
+(defn rtcr-watch []
+  (rtcr-stop)
+  (reset! watcher (beholder/watch rtcr ".")))
+
+(comment
+  (rtcr-watch)
+
+  )
+
 
 ;; clj tcr!
