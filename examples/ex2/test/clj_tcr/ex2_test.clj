@@ -5,3 +5,5 @@
 (deftest f-test
   (testing "we can do multiplication all right"
     (is (= 100 (sut/f 10)))))
+
+(assert true)
