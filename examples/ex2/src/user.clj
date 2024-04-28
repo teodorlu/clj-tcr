@@ -36,5 +36,6 @@
 (comment
   (reload)
   (test)
+  (tcr)
 
   :rcf)
