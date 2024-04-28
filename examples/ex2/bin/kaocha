@@ -1,4 +1,2 @@
-mkdir -p bin
-echo '#!/usr/bin/env sh' > bin/kaocha
-echo 'clojure -M:kaocha "$@"' >> bin/kaocha
-chmod +x bin/kaocha
+#!/usr/bin/env sh
+clojure -M:kaocha "$@"
