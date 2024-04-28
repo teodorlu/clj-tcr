@@ -41,8 +41,6 @@
 
   :rcf)
 
-LOL LOL
-
 (defonce watcher (atom nil))
 
 (defn rtcr-stop []
