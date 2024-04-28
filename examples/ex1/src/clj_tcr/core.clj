@@ -30,6 +30,11 @@
       (commit)
       (revert))))
 
+(comment
+  (tcr)
+
+  )
+
 (defn autotcr [])
 
 ;; clj tcr!
