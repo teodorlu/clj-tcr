@@ -10,6 +10,7 @@
 (defn commit []
   (babashka.process/shell "git add .")
   (babashka.process/shell "git commit -m working"))
+
 (defn revert []
   (babashka.process/shell "git reset --hard HEAD"))
 
