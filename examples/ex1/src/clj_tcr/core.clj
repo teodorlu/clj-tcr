@@ -23,7 +23,9 @@
 (defn revert []
   (babashka.process/shell "git reset --hard HEAD"))
 
-(defn rtcr [_]
+(defn rtcr
+  "reload && test && commit || revert"
+  [_]
   (clj-reload/reload)
   (let [ok (test)]
     (if ok
