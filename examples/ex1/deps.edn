@@ -4,7 +4,9 @@
   io.github.tonsky/clj-reload {:mvn/version "0.5.0"}
   babashka/fs {:mvn/version "0.5.20"}
   babashka/process {:mvn/version "0.5.22"}
-  lambdaisland/kaocha {:mvn/version "1.88.1376"}}
+  lambdaisland/kaocha {:mvn/version "1.88.1376"}
+  io.github.cognitect-labs/test-runner {:git/url "https://github.com/cognitect-labs/test-runner"
+                                        :git/sha "7284cda41fb9edc0f3bc6b6185cfb7138fc8a023"}}
  :aliases
  {:kaocha {:main-opts ["-m" "kaocha.runner"]}
   :dev {:extra-paths ["test"]}}}
