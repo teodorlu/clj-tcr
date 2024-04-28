@@ -1,0 +1,59 @@
+#+TITLE: TCR for Clojure, example 1
+
+We make TCR for Clojure by just using it.
+
+This folder is a standalone Clojure project that we aim to set up for
+TCR.
+
+* Open questions
+:PROPERTIES:
+:CUSTOM_ID: open-questions
+:END:
+- TCR as a REPL action or as an editor action?
+- When TCR is run as a REPL action, do we want a file watcher
+  (=user/autotcr=) or a oneoff action (=user/tcr=)?
+
+* REPL action or editor action?
+:PROPERTIES:
+:CUSTOM_ID: repl-action-or-editor-action
+:END:
+Arguments for REPL action:
+
+1. Programmers using different editors get the same experience.
+2. We can write Clojure rather than a mix of Emacs Lisp, Javascript,
+   Vimscript, Lua (and other languages)
+
+Advantages in favor of editor action:
+
+1. The editor knows which buffers contain unsaved changes, and can force
+   an atomic save of /everything/, and do that /before/ referting stuff
+2. Editor action is faster than user save, then listen to the file save.
+
+Synthesis, design that enables both:
+
+1. Make a low-level API that can be used from the REPL
+2. Implement =autotcr= in terms of that low-level API and a file watcher
+   (like =nextjournal/beholder=)
+3. Implement a reference package (eg =clj-tcr.el=) for an editor,
+   showing an example of how to set up the editor for TCR
+* 2024-04-28
+** I managed to get a =(tcr)= script working
+Look at the commit log!
+Quite happy with that.
+
+I'm using Cognitect's test runner,
+
+I want to setup clj-kondo to look for static analysis errors too, but I haven't gone there yet.
+** =(autotcr)= problems
+I wanted an in-repl file watcher that runs the tcr script on save.
+
+I tried, and produced something buggy:
+the watcher state unloads itself.
+This causes multiple watchers to be started at the same time.
+
+My conclusions:
+
+1. TCR is not fully compatible with REPL-driven development, the "snake cannot completely eat its own tail"
+   1. The semantics are vague about the TCR script and the TCR watcher itself
+   2. Those rely on process start/start assumptions
+   3. Thus, there is a two-world assumption --- the system under test and the system that tests
