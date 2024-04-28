@@ -3,11 +3,11 @@
  {com.nextjournal/beholder {:mvn/version "1.0.2"}
   io.github.tonsky/clj-reload {:mvn/version "0.5.0"}
   babashka/fs {:mvn/version "0.5.20"}
-  babashka/process {:mvn/version "0.5.22"}}
+  babashka/process {:mvn/version "0.5.22"}
+  lambdaisland/kaocha {:mvn/version "1.88.1376"}}
  :aliases
  {:kaocha
   {:extra-paths ["test"]
-   :extra-deps {lambdaisland/kaocha {:mvn/version "1.88.1376"}}
    :main-opts ["-m" "kaocha.runner"]}
   :dev
   {:extra-paths ["test"]}}}
