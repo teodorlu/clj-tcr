@@ -1,12 +1,5 @@
-(ns user
-  (:require
-   [clj-tcr.core :as clj-tcr]))
+(ns user)
 
-(comment
-
-  (clj-tcr/all-tests-green?)
-  ;; => false
-
-  (clj-tcr/assert-all-tests-green)
-
-  :rcf)
+(defn dev []
+  (require 'dev)
+  (in-ns 'dev))
