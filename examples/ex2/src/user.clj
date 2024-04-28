@@ -21,9 +21,12 @@
   "TCR RELOADED: AN IN-PROCESS INTERACTIVE LOOP"
   []
   (try
+    (println "trying")
     (reload)
     (test)
     (commit)
+    (println "success")
     (catch Exception _
+      (println "failure")
       (revert)
       (reload))))
