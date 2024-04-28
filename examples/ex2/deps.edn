@@ -3,7 +3,8 @@
   {:git/url "https://github.com/cognitect-labs/test-runner"
    :git/sha "7284cda41fb9edc0f3bc6b6185cfb7138fc8a023"}
   io.github.tonsky/clj-reload
-  {:mvn/version "0.5.0"}}
+  {:mvn/version "0.5.0"}
+  babashka/process {:mvn/version "0.5.22"}}
  :aliases
  {:kaocha
   {:extra-deps {lambdaisland/kaocha {:mvn/version "1.88.1376"}}
