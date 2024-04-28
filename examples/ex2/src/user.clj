@@ -6,6 +6,7 @@
    cognitect.test-runner))
 
 (defn reload [] (clj-reload.core/reload))
+
 (defn test [] (cognitect.test-runner/test {}))
 
 (defn commit []
