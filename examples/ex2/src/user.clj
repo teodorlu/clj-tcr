@@ -7,7 +7,10 @@
 
 (defn reload [] (clj-reload.core/reload))
 
-(defn test [] (cognitect.test-runner/test {}))
+(defn test []
+  (let [{:keys [fail error]}
+        (cognitect.test-runner/test {})]
+    (assert (zero? (+ fail error)))))
 
 (defn commit []
   (babashka.process/shell "git add .")
@@ -30,3 +33,9 @@
       (println "failure")
       (revert)
       (reload))))
+
+(comment
+  (reload)
+  (test)
+
+  )
