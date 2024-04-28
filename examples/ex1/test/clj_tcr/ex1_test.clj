@@ -6,5 +6,5 @@
 (deftest f-test
   (is (= 10 (subject/f 4 6))))
 
-(deftest failing
-  (is (= 1 2)))
+(deftest t2
+  (is (= 2 2)))
