@@ -1,7 +1,7 @@
 (ns clj-tcr.core
   (:refer-clojure :exclude [test])
   (:require
-   [clojure.test :as test]
+   babashka.process
    [cognitect.test-runner]
    [kaocha.runner]))
 
@@ -12,14 +12,15 @@
   (let [{:keys [fail error]} (run-tests)]
     (zero? (+ fail error))))
 
-(defn assert-all-tests-green
-  []
-  (assert (all-tests-green?)))
-
 (defn test []
   (all-tests-green?))
-(defn commit [])
-(defn revert [])
+
+(defn commit []
+  (babashka.process/shell "git add .")
+  (babashka.process/shell "git commit -m working"))
+
+(defn revert []
+  (babashka.process/shell "git reset --hard HEAD"))
 
 (defn tcr []
   (let [ok (test)]
@@ -27,19 +28,6 @@
       (commit)
       (revert))))
 
-
 (defn autotcr [])
 
 ;; clj tcr!
-
-(comment
-
-  (load-all-tests)
-
-  (test/run-all-tests)
-
-  (all-tests-green?)
-
-  (assert-all-tests-green)
-
-  :rcf)
