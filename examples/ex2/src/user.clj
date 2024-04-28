@@ -7,6 +7,7 @@
 
 (defn reload [] (clj-reload.core/reload))
 (defn test [] (cognitect.test-runner/test {}))
+
 (defn commit []
   (babashka.process/shell "git add .")
   (babashka.process/shell "git commit -m working"))
