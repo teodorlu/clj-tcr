@@ -11,7 +11,7 @@ Read on to understand how.
 
 In "vanilla" TCR, _reload_ is implied as part of the `test` operation.
 This assumption doesn't hold for how people develop Clojure in practice.
-We can tweak the TCR process by inserting approperiate _reload_ operations where needed.
+We can tweak the TCR process by inserting appropriate _reload_ operations where needed.
 
 We'll be using `tonsky/clj-reload` for this. Thank you, Niki!
 
